@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import { authenticate, authorize } from '../core/auth.middleware';
 import { UserRole } from '../models/types';
+import { AnalyticsController } from './controllers/analytics.controller';
 
 dotenv.config();
 
@@ -40,9 +41,8 @@ app.get('/api/v1/supplier/portal', authenticate, authorize([UserRole.SUPPLIER_AD
   res.json({ message: 'Welcome to the Supplier Portal' });
 });
 
-app.get('/api/v1/analytics', authenticate, (req: Request, res: Response) => {
-  res.json({ message: 'Environmental Analytics API - Phase 6 Placeholder' });
-});
+// Updated Analytics Endpoint
+app.get('/api/v1/analytics/impact', authenticate, AnalyticsController.getUserImpact);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
