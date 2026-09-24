@@ -6,12 +6,10 @@ export class SupplierRepository {
     const res = await query('SELECT * FROM suppliers');
     return res.rows;
   }
-
   static async findById(id: string): Promise<Supplier | null> {
     const res = await query('SELECT * FROM suppliers WHERE id = $1', [id]);
     return res.rows[0] || null;
   }
-
   static async create(supplier: Partial<Supplier>): Promise<Supplier> {
     const res = await query(
       'INSERT INTO suppliers (owner_id, business_name, category, status) VALUES ($1, $2, $3, $4) RETURNING *',

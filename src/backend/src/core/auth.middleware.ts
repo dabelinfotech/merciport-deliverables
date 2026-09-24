@@ -10,11 +10,7 @@ export interface AuthRequest extends Request {
 
 export const authenticate = (req: AuthRequest, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(' ')[1];
-
-  if (!token) {
-    return res.status(401).json({ error: 'Authentication token required' });
-  }
-
+  if (!token) return res.status(401).json({ error: 'Authentication token required' });
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as { id: string; role: UserRole };
     req.user = decoded;

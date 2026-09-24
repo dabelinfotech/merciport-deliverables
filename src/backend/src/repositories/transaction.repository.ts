@@ -9,7 +9,6 @@ export class TransactionRepository {
     );
     return res.rows[0];
   }
-
   static async findByCustomerId(customerId: string): Promise<Transaction[]> {
     const res = await query('SELECT * FROM transactions WHERE customer_id = $1', [customerId]);
     return res.rows;

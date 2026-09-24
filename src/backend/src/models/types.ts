@@ -13,6 +13,7 @@ export enum VerificationStatus {
 export interface User {
   id: string;
   email: string;
+  password_hash: string; // Added for Auth
   role: UserRole;
   fullName: string;
   createdAt: Date;

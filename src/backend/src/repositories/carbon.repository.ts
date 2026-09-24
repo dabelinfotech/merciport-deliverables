@@ -9,7 +9,6 @@ export class CarbonRepository {
     );
     return res.rows[0];
   }
-
   static async findByCustomerId(customerId: string): Promise<CarbonLog[]> {
     const res = await query(
       'SELECT cl.* FROM carbon_logs cl JOIN transactions t ON cl.transaction_id = t.id WHERE t.customer_id = $1',
