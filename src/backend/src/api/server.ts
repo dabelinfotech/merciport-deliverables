@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 import { authenticate, authorize } from '../core/auth.middleware';
 import { UserRole } from '../models/types';
 import { AnalyticsController } from './controllers/analytics.controller';
+import { AuthController } from './controllers/auth.controller';
+import { SupplierController } from './controllers/supplier.controller';
 
 dotenv.config();
 
@@ -21,27 +23,25 @@ app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ status: 'UP', timestamp: new Date().toISOString() });
 });
 
-app.post('/api/v1/auth/login', (req: Request, res: Response) => {
-  const { email } = req.body;
-  res.json({ 
-    token: 'mock_jwt_token_for_' + email, 
-    user: { email, role: 'customer' } 
-  });
-});
+// AUTH ROUTES
+app.post('/api/v1/auth/register', AuthController.register);
+app.post('/api/v1/auth/login', AuthController.login);
 
+// USER ROUTES
 app.get('/api/v1/me', authenticate, (req: any, res: Response) => {
   res.json({ user: req.user });
 });
 
+// SUPPLIER ROUTES
+app.get('/api/v1/suppliers', authenticate, SupplierController.getAll);
+app.post('/api/v1/suppliers', authenticate, authorize([UserRole.SUPPLIER_ADMIN, UserRole.PLATFORM_ADMIN]), SupplierController.create);
+
+// ADMIN ROUTES
 app.get('/api/v1/admin/dashboard', authenticate, authorize([UserRole.PLATFORM_ADMIN]), (req: Request, res: Response) => {
   res.json({ message: 'Welcome to the Platform Admin Dashboard' });
 });
 
-app.get('/api/v1/supplier/portal', authenticate, authorize([UserRole.SUPPLIER_ADMIN]), (req: Request, res: Response) => {
-  res.json({ message: 'Welcome to the Supplier Portal' });
-});
-
-// Updated Analytics Endpoint
+// ANALYTICS
 app.get('/api/v1/analytics/impact', authenticate, AnalyticsController.getUserImpact);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
