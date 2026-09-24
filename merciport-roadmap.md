@@ -282,3 +282,4 @@ M1 SRS ──► M2 Design ──► M3 API Freeze ──┬─► M4 Mobile App
 ---
 
 *Next step: validate the estimated durations against Merciport's team availability and target launch date, then lock the calendar dates per milestone.*
+## Project Structure\n- `docs/`: SRS, API Specs, Manuals\n- `src/`: Source code for Backend, Mobile, Portal, and Admin\n- `tests/`: QA and UAT reports
