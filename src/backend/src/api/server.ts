@@ -8,6 +8,7 @@ import { UserRole } from '../models/types';
 import { AnalyticsController } from './controllers/analytics.controller';
 import { AuthController } from './controllers/auth.controller';
 import { SupplierController } from './controllers/supplier.controller';
+import { TransactionController } from './controllers/transaction.controller';
 
 dotenv.config();
 
@@ -32,6 +33,10 @@ app.get('/api/v1/me', authenticate, (req: any, res: Response) => {
   res.json({ user: req.user });
 });
 
+// TRANSACTION & IMPACT ROUTES
+app.post('/api/v1/transactions', authenticate, TransactionController.create);
+app.get('/api/v1/analytics/impact', authenticate, TransactionController.getMyImpact);
+
 // SUPPLIER ROUTES
 app.get('/api/v1/suppliers', authenticate, SupplierController.getAll);
 app.post('/api/v1/suppliers', authenticate, authorize([UserRole.SUPPLIER_ADMIN, UserRole.PLATFORM_ADMIN]), SupplierController.create);
@@ -40,9 +45,6 @@ app.post('/api/v1/suppliers', authenticate, authorize([UserRole.SUPPLIER_ADMIN, 
 app.get('/api/v1/admin/dashboard', authenticate, authorize([UserRole.PLATFORM_ADMIN]), (req: Request, res: Response) => {
   res.json({ message: 'Welcome to the Platform Admin Dashboard' });
 });
-
-// ANALYTICS
-app.get('/api/v1/analytics/impact', authenticate, AnalyticsController.getUserImpact);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
