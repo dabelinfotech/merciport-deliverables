@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merciport Platform Preview</title>
+    <style>
+        :root {
+            --primary: #2D6A4F;
+            --secondary: #52B788;
+            --accent: #B7E4C7;
+            --background: #F8FAF9;
+            --text: #1B4332;
+            --white: #FFFFFF;
+            --gray: #6C757D;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: var(--background); color: var(--text); }
+        nav { background: var(--primary); color: var(--white); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .container { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+        .card { background: var(--white); padding: 2rem; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; margin-bottom: 2rem; }
+        .stat-value { font-size: 4rem; font-weight: bold; color: var(--primary); margin: 0; }
+        .stat-label { font-size: 1.2rem; color: var(--gray); margin-bottom: 1rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .btn { background: var(--primary); color: var(--white); border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn:hover { background: var(--secondary); }
+        .section-title { font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text); border-left: 5px solid var(--secondary); padding-left: 15px; }
+        .supplier-item { background: var(--white); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--secondary); }
+        .badge { background: var(--accent); color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div style="font-weight: bold; font-size: 1.4rem;">🌿 Merciport Preview</div>
+        <div>Customer View | Supplier View | Admin View</div>
+    </nav>
+
+    <div class="container">
+        <!-- CUSTOMER SECTION -->
+        <div id="customer-view">
+            <h2 class="section-title">Customer Impact Dashboard</h2>
+            <div class="card">
+                <p class="stat-label">Total Carbon Offset</p>
+                <p class="stat-value">12.45t</p>
+                <p style="color: var(--secondary)">CO2 equivalent saved from your choices</p>
+            </div>
+            
+            <h3 style="margin-top: 3rem;">Recommended Eco-Suppliers</h3>
+            <div class="supplier-item">
+                <div>
+                    <strong>GreenEnergy Lagos</strong><br>
+                    <small>Renewable Energy Installation</small>
+                </div>
+                <button class="btn">Book Service</button>
+            </div>
+            <div class="supplier-item">
+                <div>
+                    <strong>EcoWaste Solutions</strong><br>
+                    <small>Industrial Waste Diversion</small>
+                </div>
+                <button class="btn">Book Service</button>
+            </div>
+        </div>
+
+        <hr style="margin: 4rem 0; border: 0; border-top: 1px solid var(--accent);">
+
+        <!-- SUPPLIER SECTION -->
+        <div id="supplier-view">
+            <h2 class="section-title">Supplier Management Portal</h2>
+            <div class="grid">
+                <div class="card">
+                    <p class="stat-label">My Total Impact</p>
+                    <p class="stat-value" style="color: var(--secondary);">450.2t</p>
+                    <p>CO2 offset by your customers</p>
+                </div>
+                <div class="card">
+                    <p class="stat-label">Active Services</p>
+                    <p class="stat-value" style="color: var(--text);">8</p>
+                    <p>Verified eco-offerings</p>
+                </div>
+            </div>
+            <div style="margin-top: 2rem; background: var(--white); padding: 2rem; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <h3>Add New Eco-Service</h3>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <input type="text" placeholder="Service Name" style="padding: 10px; border: 1px solid var(--accent); border-radius: 5px; flex: 1;">
+                    <input type="number" placeholder="Offset (t)" style="padding: 10px; border: 1px solid var(--accent); border-radius: 5px; width: 120px;">
+                    <button class="btn">Add Service</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
